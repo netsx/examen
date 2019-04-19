@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">examen</string>
+    <string name="search">Buscar</string>
+    <string name="title">Title</string>
+    <string name="artist">Artist</string>
+
+    <string name="proyecto2">Proyecto 2: Series</string>
+    <string name="proyecto1">Proyecto 1: Letras</string>
+    <string name="error_empty">Campo requerido</string>
+    <string name="title_activity_lyrics">Lyrics</string>
+    <string name="error_service">Error: no se pudo conectar al servidor</string>
+    <string name="mis_letras">Mis letras</string>
+    <string name="title_letras">Letras de canciones</string>
+</resources>
