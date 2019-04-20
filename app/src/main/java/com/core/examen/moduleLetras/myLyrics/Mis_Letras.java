@@ -40,7 +40,5 @@ public class Mis_Letras extends AppCompatActivity {
 
         lyrics.setText(sharedpreferences.getString("artist", ""));
 
-       // Toast.makeText(this, sharedpreferences.getString("artist", "").toString(), Toast.LENGTH_LONG).show();
-
     }
 }
