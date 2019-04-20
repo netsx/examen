@@ -23,6 +23,8 @@ public class Mis_Letras extends AppCompatActivity {
 
     public static final String mypreference = "save";
 
+
+
     Adaptador adaptador;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
