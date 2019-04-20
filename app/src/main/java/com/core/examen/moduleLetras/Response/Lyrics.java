@@ -70,19 +70,26 @@ public class Lyrics extends AppCompatActivity {
 
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
-
+/*
         editor.putString(save, save);
         editor.putString("artist", valor);
         editor.putString(save, save);
+        */
+
+        editor.putString("lyric", valor);
+        editor.putString("artist", artist);
+        editor.putString("title", song);
         editor.commit();
 
-        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+        Snackbar.make(view, R.string.success, Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         Intent activity = new Intent(this, Letras.class);
         startActivity(activity);
     }

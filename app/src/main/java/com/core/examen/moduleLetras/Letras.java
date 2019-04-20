@@ -42,6 +42,7 @@ public class Letras extends AppCompatActivity implements MainView {
 
 
         mostrarView();
+
         presenter = new Presentador(this);
         progressBar.setVisibility(View.GONE);
 

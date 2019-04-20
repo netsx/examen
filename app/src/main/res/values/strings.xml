@@ -11,4 +11,7 @@
     <string name="error_service">Error: no se pudo conectar al servidor</string>
     <string name="mis_letras">Mis letras</string>
     <string name="title_letras">Letras de canciones</string>
+    <string name="delete">Borrar canción</string>
+    <string name="success">Canción guardada exitosamente</string>
+    <string name="question">¿Esta seguro que desea borrar esta canción?</string>
 </resources>
