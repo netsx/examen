@@ -35,11 +35,15 @@
             android:layout_marginTop="48dp"
             android:focusable="false"
             android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/artist"
+
+            <EditText
+                android:id="@+id/artist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="@string/artist"/>
+                android:hint="@string/artist"
+
+                android:nextFocusDown="@+id/title_"
+                android:inputType="text" />
         </android.support.design.widget.TextInputLayout>
 
         <!-- Password Label -->
@@ -48,7 +52,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/title_"
+            <EditText
+
+                android:nextFocusDown="@+id/btn_search"
+                android:id="@+id/title_"
                 android:focusable="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

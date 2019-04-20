@@ -48,16 +48,39 @@ public class Letras extends AppCompatActivity implements MainView {
 
     }
 
+    /*
+    *
+    *
+    * Respuesta si es positiva la consulta y envio de datos
+    * a la nueva activity
+    *
+    *
+    * */
     @Override
     public void show(String resultado) {
 
+        String artista=artist.getText().toString();
+        String titulo = title.getText().toString();
+
         Intent activity = new Intent(this, Lyrics.class);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-        activity.putExtra("resultado", resultado);
+        activity.putExtra("artist", artista);
+        activity.putExtra("title", titulo);
+        activity.putExtra("lyric", resultado);
         startActivity(activity);
-        finish();
+
 
     }
+
+
+    /*
+     *
+     *
+     * Respuesta negativa a la consulta
+     *
+     *
+     * */
+
 
     @Override
     public void showError(String error) {
@@ -88,6 +111,7 @@ public class Letras extends AppCompatActivity implements MainView {
 
 
     private void ocultarView() {
+
         linearLayout.setVisibility(View.GONE);
         btnMysongs.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
@@ -95,9 +119,11 @@ public class Letras extends AppCompatActivity implements MainView {
     }
 
     private void mostrarView() {
+
         linearLayout.setVisibility(View.VISIBLE);
         btnMysongs.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.GONE);
+
     }
 
     @OnClick({R.id.btn_search, R.id.btn_mysongs})
@@ -108,6 +134,13 @@ public class Letras extends AppCompatActivity implements MainView {
                 if (ValidarFormulario() == true) {
 
                     ocultarView();
+
+                    /**
+                     *
+                     * Envio de datos al presentador para su tratamiento
+                     * y ocultación de vistas
+                     *
+                     * */
                     presenter.enviarDatos(artist.getText().toString().trim(),
                             title.getText().toString().trim());
                 }
@@ -115,10 +148,17 @@ public class Letras extends AppCompatActivity implements MainView {
                 break;
             case R.id.btn_mysongs:
 
+
                     startActivity(new Intent(this, Mis_Letras.class));
-                    finish();
+
 
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

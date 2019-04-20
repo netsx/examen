@@ -3,11 +3,13 @@ package com.core.examen.moduleLetras.Response;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
 
@@ -29,6 +31,10 @@ public class Lyrics extends AppCompatActivity {
     private String valor;
     private String artist;
     private String title;
+
+    private String artis;
+    private String song;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +43,16 @@ public class Lyrics extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        valor = getIntent().getExtras().getString("resultado");
+        toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimaryDark));
+
+
+        valor = getIntent().getStringExtra("lyric");
+        artis = getIntent().getStringExtra("artist");
+        song = getIntent().getStringExtra("title");
+
         lyric.setText(valor);
+
+        toolbar.setTitle(song);
 
 
         FloatingActionButton fab = findViewById(R.id.fab);

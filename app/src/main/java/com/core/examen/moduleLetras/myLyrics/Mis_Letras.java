@@ -38,8 +38,11 @@ public class Mis_Letras extends AppCompatActivity {
         sharedpreferences = getSharedPreferences(mypreference,
                 Context.MODE_PRIVATE);
 
+
+
         lyrics.setText(sharedpreferences.getString("artist", ""));
 
 
     }
+
 }
