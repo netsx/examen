@@ -11,7 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".moduleLetras.myLyrics.Mis_Letras"></activity>
+        <activity
+            android:name=".mouleSeries.Series"
+            android:label="@string/title_activity_series"
+            android:theme="@style/NoActionBar"></activity>
+        <activity android:name=".moduleLetras.myLyrics.Mis_Letras" />
         <activity
             android:name=".moduleLetras.Response.Lyrics"
             android:label="@string/title_activity_lyrics"

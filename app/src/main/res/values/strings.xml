@@ -14,4 +14,7 @@
     <string name="delete">Borrar canción</string>
     <string name="success">Canción guardada exitosamente</string>
     <string name="question">¿Esta seguro que desea borrar esta canción?</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
+    <string name="title_activity_series">Series</string>
 </resources>

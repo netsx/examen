@@ -70,11 +70,6 @@ public class Lyrics extends AppCompatActivity {
 
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
-/*
-        editor.putString(save, save);
-        editor.putString("artist", valor);
-        editor.putString(save, save);
-        */
 
         editor.putString("lyric", valor);
         editor.putString("artist", artist);

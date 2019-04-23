@@ -59,7 +59,7 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.MyViewHolder> {
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            title = (TextView) itemView.findViewById(R.id.textview_letras);
+            title = (TextView) itemView.findViewById(R.id.name);
 
 
         }

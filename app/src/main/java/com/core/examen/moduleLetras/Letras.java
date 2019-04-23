@@ -1,5 +1,6 @@
 package com.core.examen.moduleLetras;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -91,6 +92,8 @@ public class Letras extends AppCompatActivity implements MainView {
     }
 
 
+
+
     private boolean ValidarFormulario() {
 
         boolean validacion = true;
@@ -150,7 +153,7 @@ public class Letras extends AppCompatActivity implements MainView {
             case R.id.btn_mysongs:
 
 
-                    startActivity(new Intent(this, Mis_Letras.class));
+                   startActivity(new Intent(this, Mis_Letras.class));
 
 
                 break;

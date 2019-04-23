@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.core.examen.moduleLetras.Letras;
+import com.core.examen.mouleSeries.Series;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
 
 
                 case R.id.series:
+
+                    startActivity(new Intent(this, Series.class));
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
                     break;
         }

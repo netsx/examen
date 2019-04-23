@@ -82,21 +82,21 @@ public class Mis_Letras extends AppCompatActivity {
         builder.setCancelable(true);
 
         builder.setPositiveButton(
-                "Si",
+                R.string.yes,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         SharedPreferences.Editor editor = sharedpreferences.edit();
 
                         editor.clear();
                         editor.commit() ;
-                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        overridePendingTransition(android.R.anim.fade_out, android.R.anim.fade_in);
                         startActivity(new Intent(Mis_Letras.this,Letras.class));
 
                     }
                 });
 
         builder.setNegativeButton(
-                "No",
+                R.string.no,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
