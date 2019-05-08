@@ -98,13 +98,13 @@ public class Letras extends AppCompatActivity implements MainView {
 
         boolean validacion = true;
 
-        if (artist.getText().toString().isEmpty()) {
+        if (artist.getText().toString().trim().isEmpty()) {
 
             artist.setError(getResources().getString(R.string.error_empty));
             return false;
         }
 
-        if (title.getText().toString().isEmpty()) {
+        if (title.getText().toString().trim().isEmpty()) {
 
             artist.setError(getResources().getString(R.string.error_empty));
             return false;

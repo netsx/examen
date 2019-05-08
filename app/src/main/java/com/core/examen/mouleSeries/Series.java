@@ -46,9 +46,8 @@ public class Series extends AppCompatActivity implements ViewShow {
     RecyclerView reciclador;
 
 
+    private ShowPresenter presentador;
 
-
-    private   ShowPresenter presentador;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +59,6 @@ public class Series extends AppCompatActivity implements ViewShow {
         presentador = new ShowPresenter(this);
 
 
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -68,11 +66,12 @@ public class Series extends AppCompatActivity implements ViewShow {
                 searchView.setIconified(true);
                 return true;
             }
+
             @Override
             public boolean onQueryTextChange(String newText) {
 
 
-                  retro(newText);
+                retro(newText);
 
 
                 return true;
@@ -89,25 +88,24 @@ public class Series extends AppCompatActivity implements ViewShow {
     @Override
     public void ShowData(String data) {
 
-        StaggeredGridLayoutManager _sGridLayoutManager=
+        StaggeredGridLayoutManager _sGridLayoutManager =
                 new StaggeredGridLayoutManager(3,
                         StaggeredGridLayoutManager.VERTICAL);
 
 
-
-        Toast.makeText(Series.this,data+"recivo de interacto", Toast.LENGTH_SHORT).show();
+        Toast.makeText(Series.this, data + "recivo de interacto", Toast.LENGTH_SHORT).show();
 
 
     }
 
     @Override
     public void ShowError(String error) {
-        Toast.makeText(Series.this,error, Toast.LENGTH_SHORT).show();
+        Toast.makeText(Series.this, error, Toast.LENGTH_SHORT).show();
 
 
     }
 
-    public void retro(String query){
+    public void retro(String query) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://api.tvmaze.com/search/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -121,30 +119,30 @@ public class Series extends AppCompatActivity implements ViewShow {
         Call<List<Show>> call = request.show(query);
 
 
-                call.enqueue(new Callback<List<Show>>() {
-                    @Override
-                    public void onResponse(Call<List<Show>> call, Response<List<Show>> response) {
+        call.enqueue(new Callback<List<Show>>() {
+            @Override
+            public void onResponse(Call<List<Show>> call, Response<List<Show>> response) {
 
-                        data =response.body();
-                        StaggeredGridLayoutManager _sGridLayoutManager=
-                                new StaggeredGridLayoutManager(3,
-                                        StaggeredGridLayoutManager.VERTICAL);
+                data = response.body();
+                StaggeredGridLayoutManager _sGridLayoutManager =
+                        new StaggeredGridLayoutManager(3,
+                                StaggeredGridLayoutManager.VERTICAL);
 
-                        adaptadorShow = new AdaptadorShow(data);
-
-
-                        reciclador.hasFixedSize();
-                        reciclador.setLayoutManager(_sGridLayoutManager);
-                        reciclador.setAdapter(adaptadorShow);
+                adaptadorShow = new AdaptadorShow(data);
 
 
+                reciclador.hasFixedSize();
+                reciclador.setLayoutManager(_sGridLayoutManager);
+                reciclador.setAdapter(adaptadorShow);
 
-                    }
 
-                    @Override
-                    public void onFailure(Call<List<Show>> call, Throwable t) {
+            }
 
-                    }
-                });
+            @Override
+            public void onFailure(Call<List<Show>> call, Throwable t) {
 
+            }
+        });
+
+    }
 }

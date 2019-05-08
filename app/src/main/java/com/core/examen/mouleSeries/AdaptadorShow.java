@@ -2,6 +2,7 @@ package com.core.examen.mouleSeries;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +44,12 @@ public class AdaptadorShow extends RecyclerView.Adapter<AdaptadorShow.ViewHolder
 
            viewHolder.textView.setText(String.valueOf(data.get(i).getName()));
    //     viewHolder.textView.setText(imagen.get(i).getMedium());
+        try{
+
+        }catch (Exception e){
+
+            Log.e("TAG",e.getMessage());
+        }
 
 
 

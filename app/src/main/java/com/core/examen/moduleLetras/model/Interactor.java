@@ -23,12 +23,6 @@ public class Interactor implements MainInteractor{
     Presentador presentador;
 
 
-
-    SharedPreferences pref;
-
-    // Editor for Shared preferences
-    SharedPreferences.Editor editor;
-
     Context _context;
 
 

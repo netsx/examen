@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.core.examen.R;
 import com.core.examen.moduleLetras.Letras;
+import com.core.examen.moduleLetras.model.DataBase;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,16 +25,12 @@ public class Lyrics extends AppCompatActivity {
     @BindView(R.id.lyric)
     TextView lyric;
 
+    private String letra;
+    private String artista;
+    private String titulo;
 
+    private DataBase dataBase;
 
-    SharedPreferences sharedpreferences;
-    public static final String MyPREFERENCES = "save" ;
-    private String valor;
-    private String artist;
-    private String title;
-
-    private String artis;
-    private String song;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,16 +40,17 @@ public class Lyrics extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        dataBase = new DataBase(this);
+       // toolbar.setTitleTextColor(getResources().getColor(R.color.design_default_color_primary));
 
 
-        valor = getIntent().getStringExtra("lyric");
-        artis = getIntent().getStringExtra("artist");
-        song = getIntent().getStringExtra("title");
+        letra = getIntent().getStringExtra("lyric");
+        artista = getIntent().getStringExtra("artist");
+        titulo = getIntent().getStringExtra("title");
 
-        lyric.setText(valor);
+        lyric.setText(letra);
 
-        toolbar.setTitle(song);
+        toolbar.setTitle(artista);
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -60,21 +58,16 @@ public class Lyrics extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
-                ResponseLetras( valor,view);
+                ResponseLetras( artista+" - "+ titulo , letra,view);
             }
         });
     }
 
-    private void ResponseLetras(String save, View view) {
+    private void ResponseLetras(String artista,String letra, View view) {
 
-        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedpreferences.edit();
 
-        editor.putString("lyric", valor);
-        editor.putString("artist", artist);
-        editor.putString("title", song);
-        editor.commit();
+
+        dataBase.insertNote(artista,letra );
 
         Snackbar.make(view, R.string.success, Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();

@@ -32,7 +32,15 @@
             app:layout_constraintVertical_bias="0.016">
 
 
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/reciclador_letras"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </android.support.v7.widget.RecyclerView>
             <LinearLayout
+                android:paddingTop="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"

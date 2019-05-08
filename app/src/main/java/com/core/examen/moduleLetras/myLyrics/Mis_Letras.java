@@ -1,20 +1,27 @@
 package com.core.examen.moduleLetras.myLyrics;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.core.examen.R;
 import com.core.examen.moduleLetras.Letras;
+import com.core.examen.moduleLetras.model.DataBase;
+import com.core.examen.moduleLetras.model.LetrasData;
 import com.core.examen.moduleLetras.myLyrics.adapter.Adaptador;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,12 +30,6 @@ import butterknife.OnClick;
 public class Mis_Letras extends AppCompatActivity {
 
 
-    SharedPreferences sharedpreferences;
-
-    public static final String mypreference = "save";
-
-
-    Adaptador adaptador;
     @BindView(R.id.lyrics)
     TextView lyrics;
     @BindView(R.id.delete)
@@ -39,6 +40,14 @@ public class Mis_Letras extends AppCompatActivity {
     TextView artista;
     @BindView(R.id.song)
     TextView song;
+    @BindView(R.id.reciclador_letras)
+    RecyclerView recicladorLetras;
+
+    Adaptador adaptador;
+   // private List<LetrasData> letras  ;
+
+    private List<LetrasData> letras = new ArrayList<>();
+    private DataBase dataBase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,31 +56,22 @@ public class Mis_Letras extends AppCompatActivity {
         ButterKnife.bind(this);
 
 
-        VerifySharedPreference();
+        dataBase = new DataBase(this);
+
+        letras.addAll(dataBase.getAllNotes());
 
 
+     //   notesList.addAll(db.getAllNotes());
+
+        adaptador = new Adaptador(this,letras);
+
+        recicladorLetras.hasFixedSize();
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recicladorLetras.setLayoutManager(mLayoutManager);
+        recicladorLetras.setAdapter(adaptador);
     }
 
 
-    public void VerifySharedPreference() {
-
-        sharedpreferences = getSharedPreferences(mypreference,
-                Context.MODE_PRIVATE);
-
-
-        if (sharedpreferences.getString("lyric", "").isEmpty()) {
-
-            startActivity(new Intent(this, Letras.class));
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-
-        } else {
-
-            lyrics.setText(sharedpreferences.getString("lyric", ""));
-            song.setText(sharedpreferences.getString("title", ""));
-            artista.setText(sharedpreferences.getString("artist", ""));
-
-        }
-    }
 
     @OnClick(R.id.delete)
     public void onViewClicked() {
@@ -85,12 +85,8 @@ public class Mis_Letras extends AppCompatActivity {
                 R.string.yes,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        SharedPreferences.Editor editor = sharedpreferences.edit();
 
-                        editor.clear();
-                        editor.commit() ;
-                        overridePendingTransition(android.R.anim.fade_out, android.R.anim.fade_in);
-                        startActivity(new Intent(Mis_Letras.this,Letras.class));
+
 
                     }
                 });
