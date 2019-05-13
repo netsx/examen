@@ -1,6 +1,5 @@
 package com.core.examen.moduleLetras;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.core.examen.MainActivity;
 import com.core.examen.R;
 import com.core.examen.moduleLetras.Response.Lyrics;
 import com.core.examen.moduleLetras.myLyrics.Mis_Letras;
@@ -42,7 +42,13 @@ public class Letras extends AppCompatActivity implements MainView {
         ButterKnife.bind(this);
 
 
+        /**
+         *
+         * Inicio del presentor y activación de las vistas
+         *
+         * */
         mostrarView();
+
 
         presenter = new Presentador(this);
         progressBar.setVisibility(View.GONE);
@@ -153,7 +159,8 @@ public class Letras extends AppCompatActivity implements MainView {
             case R.id.btn_mysongs:
 
 
-                   startActivity(new Intent(this, Mis_Letras.class));
+                  // startActivity(new Intent(this, Mis_Letras.class));
+                startActivity(new Intent(this, Mis_Letras.class));
 
 
                 break;
@@ -163,6 +170,16 @@ public class Letras extends AppCompatActivity implements MainView {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        /*
+        *
+        *
+        *
+        * Regreso al menu principal y eliminación de la actividad
+        *
+        *
+        * */
+        startActivity(new Intent(this,MainActivity.class));
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();
     }
 }

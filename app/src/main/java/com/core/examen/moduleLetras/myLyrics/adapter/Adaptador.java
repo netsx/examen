@@ -1,7 +1,10 @@
 package com.core.examen.moduleLetras.myLyrics.adapter;
 
+import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.NonNull;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,34 +14,42 @@ import android.widget.TextView;
 
 import com.core.examen.R;
 import com.core.examen.moduleLetras.model.LetrasData;
+import com.core.examen.moduleLetras.myLyrics.Mis_Letras;
+import com.core.examen.moduleLetras.myLyrics.fragment.Letra;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Adaptador extends RecyclerView.Adapter<Adaptador.MyViewHolder> {
 
     private Context context;
-    private List<LetrasData> notesList;
+    private List<LetrasData> letrasData;
+
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView note;
-        public TextView dot;
-        public TextView timestamp;
+        public TextView artista;
+        public TextView letra;
+        public CardView cardView;
+
 
 
         public MyViewHolder(View view) {
 
             super(view);
 
-            note = view.findViewById(R.id.text_Artist);
-            //dot = view.findViewById(R.id.dot);
-        }
+            artista = view.findViewById(R.id.text_Artist);
+            letra = view.findViewById(R.id.text_letter);
+            cardView= view.findViewById(R.id.cardView);
+            }
+
+
     }
 
 
-    public Adaptador(Context context, List<LetrasData> notesList) {
+    public Adaptador(Context context, List<LetrasData> letrasData) {
         this.context = context;
-        this.notesList = notesList;
+        this.letrasData = letrasData;
+
     }
 
     @Override
@@ -50,23 +61,69 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.MyViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
-        LetrasData note = notesList.get(position);
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
+       final LetrasData letra = letrasData.get(position);
 
-        holder.note.setText(note.getArtist());
+        holder.artista.setText(letra.getArtist());
+        holder.letra.setText(letra.getLyric());
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+
+                Intent i = new Intent(context, Letra.class);
+          
+
+                i.putExtra("id", letra.getId());
+                i.putExtra("artista", letra.getArtist());
+                i.putExtra("letra",letra.getLyric());
+
+                context.startActivity(i);
+                ((Activity)context).finish();
+
+                /*
+                FragmentManager fm ;
+
+                Bundle args = new Bundle();
+                args.putInt("id", letra.getId());
+                args.putString("letra", letra.getLyric());
+                createSimpleDialog(letra.getArtist(),letra.getLyric());
+*/
+/*
+               AppCompatActivity activity = (AppCompatActivity) holder.cardView.getContext();
+                Fragment myFragment = new FragmentLetter();
+                Bundle args = new Bundle();
+                args.putInt("id", letra.getId());
+                args.putString("letra", letra.getLyric());
+                myFragment.setArguments(args);
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame, myFragment).addToBackStack(null).commit();
+
+*/
+            }
+        });
+
+
 
 
     }
 
     @Override
     public int getItemCount() {
-        return notesList.size();
+        return letrasData.size();
     }
 
-    /**
-     * Formatting timestamp to `MMM d` format
-     * Input: 2018-02-21 00:15:42
-     * Output: Feb 21
-     */
+    public void switchContent(int id, Fragment fragment) {
+        if (context == null)
+            return;
+        if (context instanceof Mis_Letras) {
+            Mis_Letras mainActivity = (Mis_Letras) context;
+            Fragment frag = fragment;
+
+        }
+
+    }
 
 }

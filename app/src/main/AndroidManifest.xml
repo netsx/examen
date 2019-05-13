@@ -3,7 +3,7 @@
     package="com.core.examen">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,9 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
+            android:name=".moduleLetras.myLyrics.fragment.Letra"
+            android:label="@string/title_activity_letra"
+            android:theme="@style/NoActionBar"></activity>
+
+        <activity
             android:name=".mouleSeries.Series"
             android:label="@string/title_activity_series"
-            android:theme="@style/NoActionBar"></activity>
+            android:theme="@style/NoActionBar" />
         <activity android:name=".moduleLetras.myLyrics.Mis_Letras" />
         <activity
             android:name=".moduleLetras.Response.Lyrics"
