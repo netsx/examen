@@ -12,7 +12,6 @@ public class LetrasData {
     private String lyric;
 
 
-    // Create table SQL query
     public static final String CREATE_TABLE =
             "CREATE TABLE " + TABLE_NAME + "("
                     + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"

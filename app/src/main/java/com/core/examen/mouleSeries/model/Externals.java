@@ -8,19 +8,19 @@ public class Externals {
 
     @SerializedName("tvrage")
     @Expose
-    private int tvrage;
+    private Object tvrage;
     @SerializedName("thetvdb")
     @Expose
     private int thetvdb;
     @SerializedName("imdb")
     @Expose
-    private String imdb;
+    private Object imdb;
 
-    public int getTvrage() {
+    public Object getTvrage() {
         return tvrage;
     }
 
-    public void setTvrage(int tvrage) {
+    public void setTvrage(Object tvrage) {
         this.tvrage = tvrage;
     }
 
@@ -32,11 +32,11 @@ public class Externals {
         this.thetvdb = thetvdb;
     }
 
-    public String getImdb() {
+    public Object getImdb() {
         return imdb;
     }
 
-    public void setImdb(String imdb) {
+    public void setImdb(Object imdb) {
         this.imdb = imdb;
     }
 

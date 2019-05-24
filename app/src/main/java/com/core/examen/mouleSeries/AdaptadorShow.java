@@ -1,18 +1,22 @@
 package com.core.examen.mouleSeries;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.core.examen.MainActivity;
 import com.core.examen.R;
 import com.core.examen.mouleSeries.model.Example;
-import com.core.examen.mouleSeries.model.Image;
-import com.core.examen.mouleSeries.model.Show;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +25,13 @@ public class AdaptadorShow extends RecyclerView.Adapter<AdaptadorShow.ViewHolder
 
 
 
-    private List<Show> data = new ArrayList<>();
+    private List<Example> data = new ArrayList<>();
 
+    private Context context;
 
-    public AdaptadorShow(List<Show> data) {
+    public AdaptadorShow(List<Example> data, Context context) {
         this.data = data;
+        this.context = context;
 
     }
 
@@ -39,44 +45,81 @@ public class AdaptadorShow extends RecyclerView.Adapter<AdaptadorShow.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdaptadorShow.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull AdaptadorShow.ViewHolder viewHolder, final int i) {
 
 
-           viewHolder.textView.setText(String.valueOf(data.get(i).getName()));
-   //     viewHolder.textView.setText(imagen.get(i).getMedium());
-        try{
+           viewHolder.textView.setText(String.valueOf(data.get(i).getShow().getName()));
 
-        }catch (Exception e){
 
-            Log.e("TAG",e.getMessage());
-        }
+                try{
 
+
+                    Glide
+                            .with(viewHolder.imageView.getContext())
+                            .load(data.get(i).getShow().getImage().getOriginal())
+                            .centerCrop()
+                            .placeholder(R.mipmap.ic_launcher)
+                            .into(viewHolder.imageView);
+
+
+                }catch (Exception e){
+
+                    Log.e("TAG",e.getMessage());
+                }
+
+        viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(context, MainActivity.class);
+
+                intent.putExtra("id", data.get(i).getShow().getId());
+              //  context.startActivity(intent);
+
+
+                Toast.makeText(context,String.valueOf(data.get(i).getShow().getId()) ,Toast.LENGTH_LONG).show();
+            }
+        });
 
 
     }
 
     @Override
     public int getItemCount() {
-        if(data != null){
-            return data.size();
-        } else {
-            return 0;
-        }
 
-     //   return show.size();
+
+        return data.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView textView;
-        private ImageView imageView;
+        private AppCompatTextView textView;
+        private AppCompatImageView imageView;
+        private CardView cardView;
         public ViewHolder(View itemView) {
             super(itemView);
 
-            textView = (TextView) itemView.findViewById(R.id.name);
-            imageView = (ImageView) itemView.findViewById(R.id.imageView);
+            textView = (AppCompatTextView) itemView.findViewById(R.id.name);
+            imageView = (AppCompatImageView) itemView.findViewById(R.id.imagen);
+            cardView = (CardView)itemView.findViewById(R.id.cardviewshow);
 
+
+            cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+                            Intent intent = new Intent(context, MainActivity.class);
+
+                          //  intent.putExtra("id", data.get(i).getShow().getId());
+                          //  context.startActivity(intent);
+
+
+                }
+            });
         }
+
+
     }
 }
 

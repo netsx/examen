@@ -4,11 +4,8 @@ package com.core.examen.mouleSeries.model;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.squareup.moshi.Json;
 
 public class Show {
-
-
 
     @SerializedName("id")
     @Expose
@@ -39,28 +36,28 @@ public class Show {
     private String premiered;
     @SerializedName("officialSite")
     @Expose
-    private String officialSite;
+    private Object officialSite;
     @SerializedName("schedule")
     @Expose
-    private String schedule;
+    private Schedule schedule;
     @SerializedName("rating")
     @Expose
-    private String rating;
+    private Rating rating;
     @SerializedName("weight")
     @Expose
     private int weight;
     @SerializedName("network")
     @Expose
-    private String network;
+    private Network network;
     @SerializedName("webChannel")
     @Expose
-    private String webChannel;
+    private Object webChannel;
     @SerializedName("externals")
     @Expose
-    private String externals;
+    private Externals externals;
     @SerializedName("image")
     @Expose
-    private String image;
+    private Image image;
     @SerializedName("summary")
     @Expose
     private String summary;
@@ -69,7 +66,7 @@ public class Show {
     private int updated;
     @SerializedName("_links")
     @Expose
-    private String links;
+    private Links links;
 
     public int getId() {
         return id;
@@ -143,27 +140,27 @@ public class Show {
         this.premiered = premiered;
     }
 
-    public String getOfficialSite() {
+    public Object getOfficialSite() {
         return officialSite;
     }
 
-    public void setOfficialSite(String officialSite) {
+    public void setOfficialSite(Object officialSite) {
         this.officialSite = officialSite;
     }
 
-    public String getSchedule() {
+    public Schedule getSchedule() {
         return schedule;
     }
 
-    public void setSchedule(String schedule) {
+    public void setSchedule(Schedule schedule) {
         this.schedule = schedule;
     }
 
-    public String getRating() {
+    public Rating getRating() {
         return rating;
     }
 
-    public void setRating(String rating) {
+    public void setRating(Rating rating) {
         this.rating = rating;
     }
 
@@ -175,11 +172,11 @@ public class Show {
         this.weight = weight;
     }
 
-    public String getNetwork() {
+    public Network getNetwork() {
         return network;
     }
 
-    public void setNetwork(String network) {
+    public void setNetwork(Network network) {
         this.network = network;
     }
 
@@ -187,23 +184,23 @@ public class Show {
         return webChannel;
     }
 
-    public void setWebChannel(String webChannel) {
+    public void setWebChannel(Object webChannel) {
         this.webChannel = webChannel;
     }
 
-    public String getExternals() {
+    public Externals getExternals() {
         return externals;
     }
 
-    public void setExternals(String externals) {
+    public void setExternals(Externals externals) {
         this.externals = externals;
     }
 
-    public String getImage() {
+    public Image getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(Image image) {
         this.image = image;
     }
 
@@ -223,12 +220,12 @@ public class Show {
         this.updated = updated;
     }
 
-    public String getLinks() {
+    public Links getLinks() {
         return links;
     }
 
-    public void setLinks(String links) {
+    public void setLinks(Links links) {
         this.links = links;
     }
-}
 
+}

@@ -1,12 +1,11 @@
 package com.core.examen.mouleSeries;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
@@ -14,8 +13,7 @@ import android.widget.Toast;
 
 import com.core.examen.R;
 import com.core.examen.mouleSeries.model.ApiInterface;
-import com.core.examen.mouleSeries.model.Image;
-import com.core.examen.mouleSeries.model.Show;
+import com.core.examen.mouleSeries.model.Example;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,10 +30,9 @@ public class Series extends AppCompatActivity implements ViewShow {
 
     AdaptadorShow adaptadorShow;
 
-    private List<Show> data = new ArrayList<>();
-    private ArrayList<Image> image = new ArrayList<>();
+    private List<Example> data = new ArrayList<>();
 
-    private List<Show> shows;
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.search_view)
@@ -71,7 +68,7 @@ public class Series extends AppCompatActivity implements ViewShow {
             public boolean onQueryTextChange(String newText) {
 
 
-                retro(newText);
+                presentador.sendData(newText);
 
 
                 return true;
@@ -88,13 +85,7 @@ public class Series extends AppCompatActivity implements ViewShow {
     @Override
     public void ShowData(String data) {
 
-        StaggeredGridLayoutManager _sGridLayoutManager =
-                new StaggeredGridLayoutManager(3,
-                        StaggeredGridLayoutManager.VERTICAL);
-
-
-        Toast.makeText(Series.this, data + "recivo de interacto", Toast.LENGTH_SHORT).show();
-
+        retro(data);
 
     }
 
@@ -106,8 +97,9 @@ public class Series extends AppCompatActivity implements ViewShow {
     }
 
     public void retro(String query) {
+
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://api.tvmaze.com/search/")
+                .baseUrl("http://api.tvmaze.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -116,33 +108,34 @@ public class Series extends AppCompatActivity implements ViewShow {
         ApiInterface request = retrofit.create(ApiInterface.class);
 
 
-        Call<List<Show>> call = request.show(query);
+        Call<List<Example>> call = request.show(query);
 
 
-        call.enqueue(new Callback<List<Show>>() {
-            @Override
-            public void onResponse(Call<List<Show>> call, Response<List<Show>> response) {
+     call.enqueue(new Callback<List<Example>>() {
+         @Override
+         public void onResponse(Call<List<Example>> call, Response<List<Example>> response) {
 
-                data = response.body();
-                StaggeredGridLayoutManager _sGridLayoutManager =
-                        new StaggeredGridLayoutManager(3,
-                                StaggeredGridLayoutManager.VERTICAL);
+             Log.d("TAG",response.body().toString());
+             data = response.body();
+             StaggeredGridLayoutManager _sGridLayoutManager =
+                     new StaggeredGridLayoutManager(3,
+                             StaggeredGridLayoutManager.VERTICAL);
 
-                adaptadorShow = new AdaptadorShow(data);
-
-
-                reciclador.hasFixedSize();
-                reciclador.setLayoutManager(_sGridLayoutManager);
-                reciclador.setAdapter(adaptadorShow);
+             adaptadorShow = new AdaptadorShow(data, getApplicationContext());
 
 
-            }
+             reciclador.hasFixedSize();
+             reciclador.setLayoutManager(_sGridLayoutManager);
+             reciclador.setAdapter(adaptadorShow);
+         }
 
-            @Override
-            public void onFailure(Call<List<Show>> call, Throwable t) {
+         @Override
+         public void onFailure(Call<List<Example>> call, Throwable t) {
 
-            }
-        });
+             Log.e("TAG",t.getMessage());
+
+         }
+     });
 
     }
 }

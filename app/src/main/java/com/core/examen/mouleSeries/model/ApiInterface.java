@@ -19,6 +19,6 @@ public interface ApiInterface {
 
 
     @GET("/search/shows")
-   Call<List<Show>> show(@Query("q") String text);
+   Call<List<Example>> show(@Query("q") String text);
 
 }
