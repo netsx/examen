@@ -111,7 +111,6 @@ public class AdaptadorShow extends RecyclerView.Adapter<AdaptadorShow.ViewHolder
 
                             Intent intent = new Intent(context, MainActivity.class);
 
-                          //  intent.putExtra("id", data.get(i).getShow().getId());
                           //  context.startActivity(intent);
 
 

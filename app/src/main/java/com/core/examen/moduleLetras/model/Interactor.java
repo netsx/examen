@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.core.examen.moduleLetras.Letras;
 import com.core.examen.moduleLetras.retrofit.ApiInterface;
@@ -57,17 +58,23 @@ public class Interactor implements MainInteractor{
                @Override
                public void onResponse(Call<DatosLetras> call, Response<DatosLetras> response) {
 
+
                    DatosLetras datosLetras = response.body();
+                   try {
 
-                   presentador.showResultado( datosLetras.getLyrics().toString());
+                       presentador.showResultado(datosLetras.getLyrics());
 
+                   }catch (Exception e){
+
+                            presentador.showError(e.getMessage());
+                   }
 
                }
 
                @Override
                public void onFailure(Call<DatosLetras> call, Throwable t) {
 
-                   presentador.showError("Error al conectar al servidor");
+                   presentador.showError("Error al conectar al servidor"+t.getMessage());
 
                }
            });
