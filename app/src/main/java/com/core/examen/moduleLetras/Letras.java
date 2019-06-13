@@ -2,8 +2,11 @@ package com.core.examen.moduleLetras;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -35,6 +38,8 @@ public class Letras extends AppCompatActivity implements MainView {
     AppCompatButton btnMysongs;
     private MainPresenter presenter;
 
+    private  String ARTISTA ="SaveArtist";
+    private String TITLE ="SaveTItle";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,11 +54,36 @@ public class Letras extends AppCompatActivity implements MainView {
          * */
         mostrarView();
 
+        if (savedInstanceState!=null){
 
-        presenter = new Presentador(this);
+            String ArtistSave = savedInstanceState.getString(ARTISTA);
+            String TitleSave = savedInstanceState.getString(TITLE);
+
+            title.setText(ArtistSave);
+            artist.setText(TitleSave);
+
+        }else {
+
+
+
+        }
+
+
+         presenter = new Presentador(this);
         progressBar.setVisibility(View.GONE);
 
 
+
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+
+
+
+        outState.putString(ARTISTA, artist.getText().toString());
+        outState.putString(TITLE,title.getText().toString());
     }
 
     /*
@@ -104,18 +134,36 @@ public class Letras extends AppCompatActivity implements MainView {
 
         boolean validacion = true;
 
+
+
+
         if (artist.getText().toString().trim().isEmpty()) {
 
             artist.setError(getResources().getString(R.string.error_empty));
+            btnSearch.setVisibility(View.GONE);
             return false;
         }
+        if (artist.length()<3) {
+
+            artist.setError(getResources().getString(R.string.error_short_name));
+            btnSearch.setVisibility(View.GONE);
+            return false;
+        }
+
 
         if (title.getText().toString().trim().isEmpty()) {
 
-            artist.setError(getResources().getString(R.string.error_empty));
+            title.setError(getResources().getString(R.string.error_empty));
+            btnSearch.setVisibility(View.GONE);
             return false;
         }
+        if (title.length()<3) {
 
+            title.setError(getResources().getString(R.string.error_short_name));
+            btnSearch.setVisibility(View.GONE);
+            return false;
+        }
+        btnSearch.setVisibility(View.VISIBLE);
         return validacion;
     }
 
@@ -124,6 +172,7 @@ public class Letras extends AppCompatActivity implements MainView {
 
         linearLayout.setVisibility(View.GONE);
         btnMysongs.setVisibility(View.GONE);
+        btnSearch.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
 
     }
@@ -132,7 +181,45 @@ public class Letras extends AppCompatActivity implements MainView {
 
         linearLayout.setVisibility(View.VISIBLE);
         btnMysongs.setVisibility(View.VISIBLE);
+        btnSearch.setVisibility(View.GONE);
         progressBar.setVisibility(View.GONE);
+
+
+
+        artist.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                ValidarFormulario();
+            }
+        });
+
+        title.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                ValidarFormulario();
+            }
+        });
+
 
     }
 
@@ -180,6 +267,12 @@ public class Letras extends AppCompatActivity implements MainView {
         * */
         startActivity(new Intent(this,MainActivity.class));
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-        finish();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
     }
 }

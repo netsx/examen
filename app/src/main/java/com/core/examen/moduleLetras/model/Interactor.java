@@ -60,9 +60,11 @@ public class Interactor implements MainInteractor{
 
 
                    DatosLetras datosLetras = response.body();
+
                    try {
 
                        presentador.showResultado(datosLetras.getLyrics());
+
 
                    }catch (Exception e){
 

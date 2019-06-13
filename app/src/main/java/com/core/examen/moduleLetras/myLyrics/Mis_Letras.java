@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.core.examen.MainActivity;
 import com.core.examen.R;
+import com.core.examen.moduleLetras.Letras;
 import com.core.examen.moduleLetras.myLyrics.fragment.Fragment_Recycler;
 
 import butterknife.ButterKnife;
@@ -32,6 +33,9 @@ public class Mis_Letras extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        startActivity(new Intent(getApplicationContext(), Letras.class));
+
     }
 }

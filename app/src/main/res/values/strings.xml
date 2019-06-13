@@ -23,4 +23,5 @@
     <string name="title_misletras_list">Letra</string>
     <string name="title_misletras_detail">MisLetras Detail</string>
     <string name="title_activity_letra">Letra</string>
+    <string name="error_short_name">campo muy corto</string>
 </resources>
